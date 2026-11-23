@@ -1,0 +1,14 @@
+name = "rudytrade-api"
+main = "src/index.ts"
+compatibility_date = "2026-11-23"
+
+[vars]
+PAPER_ONLY = "true"
+LIVE_TRADING_ENABLED = "false"
+ORDER_API_ENABLED = "false"
+MARKET_DATA_ENABLED = "true"
+
+[triggers]
+crons = ["*/15 * * * *"]
+
+# Set DATABASE_URL and API_AUTH_TOKEN with `wrangler secret put`.

@@ -128,4 +128,5 @@ def check_cloudflare_r2() -> CloudStatus:
 
 
 def check_all() -> list[CloudStatus]:
-    return [check_postgres(), check_cloudflare_r2()]
+    # R2 intentionally excluded. Enable only after explicit approval.
+    return [check_postgres()]

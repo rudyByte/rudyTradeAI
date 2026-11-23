@@ -18,3 +18,10 @@ python -m rudytrade.cli init-db
 ```
 
 See `docs/architecture.md` for the full architecture, feasibility reports, charge and protection specifications, data-source plan, RL plan, and implementation checklist.
+
+## Current deployed endpoints
+
+- API Worker: https://rudytrade-api.reelpilot-ai-app.workers.dev
+- Frontend: https://rudytrade-command-centre.reelpilot-ai-app.workers.dev
+
+Neon is the structured-data store. R2 is disabled. Angel One integration remains disabled until market-data credentials and broker requirements are verified.

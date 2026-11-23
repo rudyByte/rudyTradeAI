@@ -46,6 +46,8 @@ class Settings:
     auto_upgrade: bool = False
     auto_paid_resource_creation: bool = False
     monthly_authorised_overage_inr: float = 0.0
+    market_data_enabled: bool = False
+    order_api_enabled: bool = False
 
     def __post_init__(self) -> None:
         if not self.paper_only:
@@ -56,6 +58,8 @@ class Settings:
             raise SafetyConfigurationError("Live trading, upgrades, and paid resource creation are disabled")
         if self.monthly_authorised_overage_inr != 0:
             raise SafetyConfigurationError("Monthly authorised overage must remain zero")
+        if self.order_api_enabled:
+            raise SafetyConfigurationError("ORDER_API_ENABLED must remain false")
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -69,4 +73,6 @@ class Settings:
             auto_upgrade=_bool(os.getenv("AUTO_UPGRADE"), False),
             auto_paid_resource_creation=_bool(os.getenv("AUTO_PAID_RESOURCE_CREATION"), False),
             monthly_authorised_overage_inr=float(os.getenv("MONTHLY_AUTHORISED_OVERAGE_INR", "0")),
+            market_data_enabled=_bool(os.getenv("MARKET_DATA_ENABLED"), False),
+            order_api_enabled=_bool(os.getenv("ORDER_API_ENABLED"), False),
         )

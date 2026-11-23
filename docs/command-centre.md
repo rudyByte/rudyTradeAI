@@ -15,3 +15,7 @@ npm run dev
 ```
 
 The API adapter and WebSocket transport are intentionally deferred until the backend service contract is implemented. The next integration phase should provide authenticated `/api/overview`, `/api/health`, `/api/usage`, and a WebSocket stream with source, timestamp, and freshness metadata on every value.
+
+## Cloud migration status
+
+Neon migration `001_initial.sql` creates the core paper-trading, market, news, model, scheduled-job, infrastructure, health, and audit tables. The migration is applied idempotently through `rudytrade migrate-neon`. Cloudflare R2 is intentionally not configured. The Worker scaffold in `worker/` exposes only health and read-only overview endpoints; no order endpoint exists.
