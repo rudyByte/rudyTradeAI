@@ -19,6 +19,18 @@ def test_database_missing_is_explicit():
     assert status.status == "NOT_CONFIGURED"
 
 
+def test_port_selection_prefers_server_port_then_port_then_default(monkeypatch):
+    monkeypatch.delenv("SERVER_PORT", raising=False)
+    monkeypatch.delenv("PORT", raising=False)
+    assert BackendSettings.port_from_env() == 8000
+
+    monkeypatch.setenv("PORT", "9000")
+    assert BackendSettings.port_from_env() == 9000
+
+    monkeypatch.setenv("SERVER_PORT", "25585")
+    assert BackendSettings.port_from_env() == 25585
+
+
 def test_no_order_routes_exposed():
     from app import create_app
     paths = {route.path for route in create_app().routes}
